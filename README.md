@@ -1,5 +1,5 @@
 # Itch.io_Get_Feature_Jams
-Webscrapes info about the latest featured Jam.
+Webscrapes info about the latest featured jams from [itch.io](https://itch.io).
 ## Requirements
 For [Featured_Jams.py](Featured_Jams.py):
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -25,7 +25,7 @@ pip install -r /path/to/requirements.txt
      ```
    - If it is placed in a different directory than the file that is calling it:
      ```python
-     from {insert_directory_name_here}.Freatured_Jams import get_featured_jams
+     from {insert_directory_path_here}.Freatured_Jams import get_featured_jams
      ```
 ## Usage
 The imported method requireds no parameters so simply call put get_featured_jams(). It should be noted that the function returns the output so in order to see the output, do the following:
@@ -41,7 +41,11 @@ Assuming the internet connection is not failing, the function should produce dic
 **Note the keyword "Start" will be used if the jam has not started yet, while "Ends" is used if the jam is currently happening.**
 ## Test
 In the repository is a file named [Test.py](Test.py). It should run as long as it is in the same directory as [Featured_Jams.py](Featured_Jams.py). The test includes:
-1. print the output of the get_featured_jams() function
-2. Validates the existence of the jam via url
-3. Validates the url of the users hosting the event
-4. Validates the date by comparing the provided date with the current date on the computer
+1. 3 additional functions:
+   - event_name_to_url(name:str)
+   - validate_url(url:list)
+   - validate_date(current_time:str,time:str,key:str)
+3. print the output of the get_featured_jams() function
+4. Validates the existence of the jam via url
+5. Validates the url of the users hosting the event
+6. Validates the date by comparing the provided date with the current date on the computer
