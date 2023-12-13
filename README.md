@@ -1,5 +1,9 @@
 # Itch.io_Get_Feature_Jams
-Webscrapes info about the latest featured jams from [itch.io](https://itch.io).
+Webscrapes info about the latest featured jams from [itch.io](https://itch.io). It provides the following information:
+- Name of the jam
+- Short description of the jam
+- Links to the itch.io accounts of the host(s)
+- Start (if it has not started yet) or end (if it already started) date of the jam
 ## Requirements
 For [Featured_Jams.py](Featured_Jams.py):
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -38,7 +42,6 @@ Assuming the internet connection is not failing, the function should produce dic
 {0:{'Name':'JAM NAME','Description':'Short description of jam',
 'Link to Host(s)':'https://itch.io/{insert_user_here}','Start/Ends':'yyyy/mm/dd'}}
 ```
-**Note the keyword "Start" will be used if the jam has not started yet, while "Ends" is used if the jam is currently happening.**
 ## Test
 In the repository is a file named [Test.py](Test.py). It should run as long as it is in the same directory as [Featured_Jams.py](Featured_Jams.py). The test includes:
 1. 3 additional functions:
