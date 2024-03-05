@@ -1,18 +1,10 @@
 import requests
 from Featured_Jams import get_featured_jams
 from datetime import datetime
+from json import loads
 
-def event_name_to_url(name):
-    name_list=name.split()
-    url='https://itch.io/jam/'
-    for num,i in enumerate(name_list):
-        url+=i.lower()
-        if num!=len(name_list)-1:
-            url+='-'
-    return url
 def validate_url(url):
     verified=0
-    fail=0
     for link in url:
         response=requests.get(link)
         if response.status_code==200:
@@ -20,14 +12,13 @@ def validate_url(url):
             verified+=1
         elif response.status_code!=200:
             print(f'{i}. {link} produced status code: {response.status_code}, not 200.')
-            fail+=1
-    print(f'Link(s) Verified for event: {verified}/{verified+fail}')
+    print(f'Link(s) Verified for event: {verified}/{len(url)}')
 
 def validate_date(current_time,time,key):
     if current_time<time and key=='Start':
         print('Jam has not started yet')
     elif current_time<time and key=='Ends':
-        print('Jam is happening')
+        print('Jam is currently running')
     elif current_time==time and key=='Start':
         print('Jam Starts Today')
     elif current_time==time and key=='Ends':
@@ -36,14 +27,12 @@ def validate_date(current_time,time,key):
         print('Error: Date has passed')
 
 print('Execute function and print outcome')
-test=get_featured_jams()
+test=loads(get_featured_jams())
 print(test)
 print('\n')
 print('Validate Event')
 for i in test:
-    link=event_name_to_url(test[i]['Name'])
-    print(f"{test[i]['Name']}")
-    validate_url([link])
+    validate_url([test[i]['Link to event']])
 print('\n')
 print('Validate Host URL')
 for i in test:
@@ -53,6 +42,6 @@ print('Validate Date')
 current_time=datetime.now().strftime('%Y/%m/%d')
 print(f'Current Date: {current_time}')
 for i in test:
-    key=list(test[i].keys())[3]
+    key=list(test[i].keys())[4]
     print(f"{i}. {test[i]['Name']}: {test[i][key]}")
     validate_date(current_time,test[i][key],key)
